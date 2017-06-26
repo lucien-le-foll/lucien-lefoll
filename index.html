@@ -1,0 +1,81 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lucien LE FOLL</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
+</head>
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <div v-for="(project, index) in projects" :class="isSelectedClass(index)">
+                        <div class="card-image">
+                            <figure class="image is-square">
+                                <img :src="getPicUrl(project.pics[0])">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h1 class="title">
+                                    {{ project.name | capitalize }}
+                                </h1>
+                                <p v-if="isSelected(index)">
+                                    {{ project.description }}
+                                </p>
+                                <a class="button is-primary" v-if="!isSelected(index)" @click="selected = index">+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.3.4/dist/vue.min.js"></script>
+    <script type="text/javascript">
+
+        var app = new Vue({
+            el: '#app',
+            data : {
+                selected : 1,
+                pics : [
+                    { name : 'pic11', description : 'desc'},
+                    { name : 'pic11', description : 'desc'},
+                    { name : 'pic11', description : 'desc'},
+                ],
+                projects : [
+                    {
+                        name : 'projet 1',
+                        description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum molestias dolore quas illo ducimus, sequi, magni perferendis. Mollitia non, consequatur ipsam at quae voluptatum asperiores error, nostrum laborum sunt.',
+                        pics : [0]
+                    },
+                    {
+                        name : 'projet 1',
+                        description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui eius commodi error inventore dolor. Voluptatum quasi iure obcaecati, ad laborum fugit commodi in repellendus alias consequuntur repellat, minus modi dolorem.',
+                        pics : [1]
+                    },
+                    {
+                        name : 'projet 1',
+                        description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta officia rem unde, doloremque quia in impedit pariatur hic modi velit, sapiente minima minus omnis sunt odio, dolor amet tenetur adipisci!',
+                        pics : [2]
+                    }
+                ]
+            },
+            methods : {
+                getPicUrl : function(picIdx){
+                    return './img/'+this.pics[picIdx].name+'.jpg';
+                },
+                isSelectedClass : function(projectIdx){
+                    var disp = projectIdx === this.selected ? 'is-6' : 'is-3';
+                    return 'card column '+disp;
+                },
+                isSelected : function (projectIdx){
+                    return projectIdx === this.selected;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
