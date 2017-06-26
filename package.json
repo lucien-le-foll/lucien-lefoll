@@ -1,0 +1,25 @@
+{
+  "name": "lucien-lefoll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucien-le-foll/lucien-lefoll.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucien-le-foll/lucien-lefoll/issues"
+  },
+  "homepage": "https://github.com/lucien-le-foll/lucien-lefoll#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "bulma": "^0.4.2",
+    "gulp": "^3.9.1",
+    "vue": "^2.3.4"
+  }
+}
