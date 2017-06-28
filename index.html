@@ -3,43 +3,77 @@
     <meta charset="UTF-8">
     <title>Lucien LE FOLL</title>
 
-    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div id="app" class="container">
-        <section class="section">
+    <section class="hero is-primary">
+        <div class="hero-body">
             <div class="container">
-                <div class="columns">
-                    <div v-for="(project, index) in projects" :class="isSelectedClass(index)">
-                        <div class="card-image">
-                            <figure class="image is-square">
-                                <img :src="getPicUrl(project.pics[0])">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content">
-                                <h1 class="title">
-                                    {{ project.name | capitalize }}
-                                </h1>
-                                <p v-if="isSelected(index)">
-                                    {{ project.description }}
-                                </p>
-                                <a class="button is-primary" v-if="!isSelected(index)" @click="selected = index">+</a>
-                            </div>
+                <h1 class="title is-1">
+                    Lucien LE FOLL
+                </h1>
+                <h2 class="subtitle is-1">
+                    UX Designer
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="projects">
+        <div class="container">
+            <h1 class="title">
+                A propos
+            </h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus animi, vel, mollitia adipisci quaerat autem nostrum, iure error possimus veniam laudantium, cupiditate voluptatum velit voluptas accusamus quod aliquid sit! Minus.
+            </p>
+            <hr>
+            <div class="columns">
+                <div v-for="icon in icons" class="column">
+                    <div class="has-text-centered">
+                        <span class="icon is-large">
+                            <i :class="getIconClass(icon.icon)"></i>
+                        </span>
+                        <h2>
+                            {{ icon.name }}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <h1 class="title">
+                Projets
+            </h1>
+            <div class="columns">
+                <div v-for="(project, index) in projects" class="column">
+                    <div class="box">
+                        <figure class="image is-square">
+                            <img :src="getPicUrl(project.pics[0])">
+                        </figure>
+                        <div class="content">
+                            <h1 class="title">
+                                {{ project.name | capitalize }}
+                            </h1>
+                            <a class="button is-primary" @click="selected = index">+</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/vue@2.3.4/dist/vue.min.js"></script>
     <script type="text/javascript">
 
-        var app = new Vue({
-            el: '#app',
+        var projects = new Vue({
+            el: '#projects',
             data : {
-                selected : 1,
+                icons : [
+                    { name : 'Patient', icon : 'fa-calendar-check-o' },
+                    { name : 'Responsable', icon : 'fa-car' },
+                    { name : 'Créatif', icon : 'fa-pencil' },
+                    { name : 'Réfléchi', icon : 'fa-check-square-o' }
+                ],
                 pics : [
                     { name : 'pic11', description : 'desc'},
                     { name : 'pic11', description : 'desc'},
@@ -69,10 +103,10 @@
                 },
                 isSelectedClass : function(projectIdx){
                     var disp = projectIdx === this.selected ? 'is-6' : 'is-3';
-                    return 'card column '+disp;
+                    return 'column box '+disp;
                 },
-                isSelected : function (projectIdx){
-                    return projectIdx === this.selected;
+                getIconClass : function(iconName){
+                    return 'fa '+iconName;
                 }
             }
         })
