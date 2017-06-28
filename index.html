@@ -8,27 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <section class="hero is-primary">
+    <section class="hero is-info">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-1">
                     Lucien LE FOLL
                 </h1>
                 <h2 class="subtitle is-1">
-                    UX Designer
+                    Web Enthusiast
                 </h2>
             </div>
         </div>
     </section>
     <section class="section" id="projects">
         <div class="container">
-            <h1 class="title">
+            <h1 class="title has-text-centered">
                 A propos
             </h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus animi, vel, mollitia adipisci quaerat autem nostrum, iure error possimus veniam laudantium, cupiditate voluptatum velit voluptas accusamus quod aliquid sit! Minus.
+            <p class="has-text-centered">
+                Développeur web et UX Designer de 23 ans, je suis toujours à la recherche de nouveaux projets pour élargir mes compétences et mettre à la portée de tout le monde des outils numériques simples et agréables à utiliser. Passionné de code, mais aussi de design, de musique, de photo et de films, je veux proposer des idées innovantes pour un web plus simple et plus clair.
             </p>
-            <hr>
+            <br>
             <div class="columns">
                 <div v-for="icon in icons" class="column">
                     <div class="has-text-centered">
@@ -41,24 +41,56 @@
                     </div>
                 </div>
             </div>
-            <h1 class="title">
+            <hr>
+            <h1 class="title has-text-centered">
                 Projets
             </h1>
+            <p class="has-text-centered">
+                Découvrez les dernières réalisations auxquelles j'ai pu participer
+            </p>
+            <br>
             <div class="columns">
                 <div v-for="(project, index) in projects" class="column">
                     <div class="box">
-                        <figure class="image is-square">
+                        <figure class="image is-fullwidth">
                             <img :src="getPicUrl(project.pics[0])">
                         </figure>
-                        <div class="content">
+                        <div class="content has-text-centered">
+                            <hr>
                             <h1 class="title">
                                 {{ project.name | capitalize }}
                             </h1>
-                            <a class="button is-primary" @click="selected = index">+</a>
+                            <a class="button is-info" @click="openProjectModal(project)">
+                                Découvrir
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr>
+            <h1 class="title has-text-centered">
+                Me contacter
+            </h1>
+            <br>
+            <div class="has-text-centered">
+                <a class="button is-info is-outlined" href="mailto:lucien.lefoll@gmail.com">
+                    Un courriel par ici
+                </a>
+            </div>
+        </div>
+        <div class="modal" :class="{'is-active' : modalOpened}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">{{ project.name }}</p>
+                </header>
+                <section class="modal-card-body">
+                    <p>
+                        {{ project.description }}
+                    </p>
+                </section>
+            </div>
+            <button class="modal-close" @click="closeProjectModal()"></button>
         </div>
     </section>
 
@@ -75,38 +107,47 @@
                     { name : 'Réfléchi', icon : 'fa-check-square-o' }
                 ],
                 pics : [
-                    { name : 'pic11', description : 'desc'},
-                    { name : 'pic11', description : 'desc'},
-                    { name : 'pic11', description : 'desc'},
+                    { name : 'dataroom', description : 'daataroom logo'},
+                    { name : 'hacklab', description : 'hacklab logo'},
+                    { name : 'face', description : 'face in the crowd logo'},
                 ],
                 projects : [
                     {
-                        name : 'projet 1',
-                        description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum molestias dolore quas illo ducimus, sequi, magni perferendis. Mollitia non, consequatur ipsam at quae voluptatum asperiores error, nostrum laborum sunt.',
+                        name : 'Dataroom',
+                        description : 'Projet mené au sein de la société Soqrate dans laquelle je suis développeur web, Dataroom est une solution de partage de fichiers ',
                         pics : [0]
                     },
                     {
-                        name : 'projet 1',
+                        name : 'Hacklab',
                         description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui eius commodi error inventore dolor. Voluptatum quasi iure obcaecati, ad laborum fugit commodi in repellendus alias consequuntur repellat, minus modi dolorem.',
                         pics : [1]
                     },
                     {
-                        name : 'projet 1',
+                        name : 'A Face in the Crowd',
                         description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta officia rem unde, doloremque quia in impedit pariatur hic modi velit, sapiente minima minus omnis sunt odio, dolor amet tenetur adipisci!',
                         pics : [2]
                     }
-                ]
+                ],
+                modalOpened : false,
+                project : {
+                    name : '',
+                    description : '',
+                    pics : ''
+                }
             },
             methods : {
                 getPicUrl : function(picIdx){
-                    return './img/'+this.pics[picIdx].name+'.jpg';
-                },
-                isSelectedClass : function(projectIdx){
-                    var disp = projectIdx === this.selected ? 'is-6' : 'is-3';
-                    return 'column box '+disp;
+                    return './img/'+this.pics[picIdx].name+'.png';
                 },
                 getIconClass : function(iconName){
                     return 'fa '+iconName;
+                },
+                openProjectModal : function(project){
+                    this.project = project;
+                    this.modalOpened = true;
+                },
+                closeProjectModal : function(){
+                    this.modalOpened = false;
                 }
             }
         })
