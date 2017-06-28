@@ -56,7 +56,7 @@
                             <img :src="getPicUrl(project.pics[0])">
                         </figure>
                         <div class="content has-text-centered">
-                            <hr>
+                            <br>
                             <h1 class="title">
                                 {{ project.name | capitalize }}
                             </h1>
@@ -78,16 +78,24 @@
                 </a>
             </div>
         </div>
+
         <div class="modal" :class="{'is-active' : modalOpened}">
             <div class="modal-background"></div>
             <div class="modal-card">
                 <header class="modal-card-head">
                     <p class="modal-card-title">{{ project.name }}</p>
                 </header>
-                <section class="modal-card-body">
+                <section class="modal-card-body content">
                     <p>
                         {{ project.description }}
                     </p>
+                    <h3>Compétences :</h3>
+                    <ul>
+                        <li v-for="tech in project.techs">{{ tech }}</li>
+                    </ul>
+                    <div class="content has-text-centered">
+                        <a :href="project.more" class="button is-info">En savoir plus</a>
+                    </div>
                 </section>
             </div>
             <button class="modal-close" @click="closeProjectModal()"></button>
@@ -114,25 +122,33 @@
                 projects : [
                     {
                         name : 'Dataroom',
-                        description : 'Projet mené au sein de la société Soqrate dans laquelle je suis développeur web, Dataroom est une solution de partage de fichiers ',
-                        pics : [0]
+                        description : 'Projet mené au sein de la société Soqrate dans laquelle je suis développeur web, Dataroom est une solution de partage de fichiers sécurisée entre professionnels. Vieillissante, l\'application a été intégralement repensée, que ce soit en front-end ou back-end, afin de la rendre plus accessible et rapide.',
+                        more : 'http://soqrate.fr/',
+                        pics : [0],
+                        techs : ['AngularJS', 'Angular Material', 'Symfony3']
                     },
                     {
                         name : 'Hacklab',
-                        description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui eius commodi error inventore dolor. Voluptatum quasi iure obcaecati, ad laborum fugit commodi in repellendus alias consequuntur repellat, minus modi dolorem.',
-                        pics : [1]
+                        description : 'Hacklab fut mon projet de fin d\'année à l\'IT de Wexford, en Irlande. Le but de cette solution était de proposer une plateforme de partage de tutoriels pour découvrir de nouveaux hobbies, comme la menuiserie, la couture, l\'électronique ...',
+                        more : 'http://hacklab.lucienlefoll.fr',
+                        pics : [1],
+                        techs: ['AngularJS', 'Angular Material']
                     },
                     {
                         name : 'A Face in the Crowd',
-                        description : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta officia rem unde, doloremque quia in impedit pariatur hic modi velit, sapiente minima minus omnis sunt odio, dolor amet tenetur adipisci!',
-                        pics : [2]
+                        description : 'Ce projet était mené dans le cadre d\'un cours d\'initiatives communautaires, à Wexford en Irlande. Son but était de retranscrire une pièce de théâtre sur les problèmes psychologiques sous la forme de courts monologues, dans le but d\'animer des ateliers sur ces sujets.',
+                        more : 'http://wexfordmentalhealthassociation.ie/a-face-in-the-crowd-drama-project/',
+                        pics : [2],
+                        techs : ['Adobe Premiere', 'Tournage', 'Prise de son']
                     }
                 ],
                 modalOpened : false,
                 project : {
                     name : '',
                     description : '',
-                    pics : ''
+                    more : '',
+                    pics : '',
+                    techs : ''
                 }
             },
             methods : {
